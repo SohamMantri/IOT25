@@ -1,0 +1,50 @@
+Practical 5:
+Title:
+Controlling an LED with ESP8266 Web Server
+Aim:
+To create a web server on the ESP8266 that allows the user to control an LED through a web browser.
+
+Tools & Components Required:
+ESP8266 NodeMCU
+LED
+resistor
+Breadboard
+jumper wires
+Micro USB cable
+Arduino IDE
+Wi-Fi connection
+Theory/Concept:
+The ESP8266 microcontroller has built-in Wi-Fi capabilities that allow it to serve as a simple web server. By accessing the IP address of the ESP8266 on a browser, we can create a user interface to interact with the device. In this case, the web server serves an HTML page with buttons to turn an LED ON or OFF. The ESP8266 reads the requests and controls the LED accordingly using its GPIO pin.
+
+Procedure:
+1. Open Arduino IDE and install the ESP8266 board package through Board Manager.
+2. Install the required USB driver (CP2102 or CH340) for ESP8266 if needed.
+3. Connect the ESP8266 to the computer and select the correct COM port.
+4. Enter your Wi-Fi credentials in the code.
+5. Upload the code to the ESP8266 board.
+6. Open the Serial Monitor and note the IP address assigned to the ESP8266.
+7. Enter the IP address into a web browser on the same Wi-Fi network.
+8. Use the ON/OFF buttons on the webpage to control the LED.
+
+Circuit Diagram:
+Connect the anode (+) of the LED to GPIO D1 (or GPIO5).
+Connect the cathode (-) of the LED to one end of a 220-ohm resistor.
+Connect the other end of the resistor to GND.
+
+Observations:
+1. The LED turns ON when the ON button is clicked and OFF when the OFF button is clicked.
+2. The ESP8266 responds to HTTP requests and updates the hardware accordingly.
+
+Result:
+Successfully created a web server using ESP8266 and controlled an LED through a browser interface over Wi-Fi.
+
+Conclusion:
+This experiment demonstrates how the ESP8266 can be used to control output devices via a web interface, which is a fundamental building block in IoT systems where remote device control is required.
+
+Skills and Competencies Acquired:
+Configuring ESP8266
+Creating a web server
+Handling HTTP requests
+Understanding GPIO
+
+Link for Code: https://github.com/akshayshinde10x/ESP32-web-server/blob/master/web%20server

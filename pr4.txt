@@ -1,0 +1,46 @@
+Practical 4
+Title: Connect IoT Devices (ESP32/ESP8266) to Cloud using MQTT Protocol
+Aim: To connect an ESP32 or ESP8266-based IoT device to a cloud platform using the MQTT protocol for real-time data publishing and subscribing.
+
+Tools and Resources Used:
+ESP32 development board
+USB cable
+Arduino IDE
+MQTT Broker
+Wi-Fi access
+PubSubClient for MQTT
+WiFi.h Library
+Theory/Concept:
+MQTT (Message Queuing Telemetry Transport) is a lightweight messaging protocol ideal for IoT. It uses a publish-subscribe model and is designed to be simple, efficient, and low-bandwidth. Devices (clients) publish messages to topics on a broker, and other devices subscribe to those topics to receive messages. This decouples devices, allowing for scalable communication in IoT systems.
+
+Procedure:
+
+1. Set up the Arduino IDE:
+Install the board manager for ESP32 or ESP8266 and Add required libraries: PubSubClient and WiFi.
+
+2. Connect ESP32/ESP8266 to Wi-Fi:
+Write code to connect the device to a local Wi-Fi network.
+
+3. Configure MQTT Broker:
+Use a public broker like broker.hivemq.com or set up a local Mosquitto broker. Choose a topic (e.g., iot/class/data) for publishing data.
+
+4. Write and Upload MQTT Code:
+Program the ESP32/ESP8266 to publish data (e.g., sensor reading) to the chosen MQTT topic. Also subscribe to a control topic for receiving commands.
+
+5. Test with MQTT Client:
+Use MQTTX or MQTT Dashboard app to monitor the topic. Observe data being published from the ESP board to the broker.
+
+6. Observe Communication:
+Verify that messages are sent and received via MQTT. Modify payloads and control logic based on interaction.
+
+Result:
+The ESP32/ESP8266 successfully connected to the MQTT broker and published data over Wi-Fi to a cloud topic. The messages were received and displayed using an MQTT client.
+
+Conclusion:This practical demonstrates how MQTT enables lightweight and efficient communication for IoT devices. It establishes the foundation for scalable real-time IoT applications using ESP boards.
+
+Outcomes:
+Setting up ESP32/ESP8266
+Understanding the MQTT protocol
+Using publish/subscribe model
+Interfacing IoT hardware
+Handling MQTT events

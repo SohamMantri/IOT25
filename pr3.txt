@@ -1,0 +1,105 @@
+Practical-3:
+Title: Interface Raspberry Pi with DHT11/ BMP/BME sensor and upload data to a webpage using Blynk
+Aim: To interface a DHT11 temperature and humidity sensor with a Raspberry Pi and upload the sensor data to a webpage using Blynk for remote monitoring.
+
+Tools Used
+Raspberry Pi (any model with GPIO pins)
+DHT11 Temperature & Humidity Sensor
+Jumper Wires
+Raspberry Pi OS (Raspbian)
+Python3
+Blynk IoT App (Android/iOS or Web Dashboard)
+Adafruit_DHT (for DHT11 sensor)
+BlynkLib (for Blynk integration)
+Theory/Concept of Experiment
+Blynk is an IoT platform that allows remote monitoring of sensor values using a mobile app or web dashboard.The Raspberry Pi reads sensor data via GPIO pins and processes it using Python scripts. It connects to the Blynk cloud via Wi-Fi to upload real-time sensor data.
+The Raspberry Pi sends real-time data to the Blynk cloud, which updates the dashboard. DHT11 sensor measures temperature and humidity. Raspberry Pi reads the data and uploads it to Blynk. Blynk dashboard/app displays the real-time sensor values.
+
+
+Procedure
+1. Hardware Connections
+DHT11 Pin    Raspberry Pi Pin
+VCC    3.3V    
+GND    GND
+DATA  GPIO 4 (or any GPIO)
+
+2. Install Required Libraries
+Update Raspberry Pi:
+sudo apt update && sudo apt upgrade -y
+
+Install Python Libraries:
+pip install Adafruit_DHT BlynkLib
+
+3. Create a Blynk Project
+Download Blynk (Android/iOS) or use Blynk Web Dashboard.
+Sign up and create a new project.
+Select "Raspberry Pi" as the hardware.
+Copy the authentication token (to be used in the Python script).
+Add Widgets to display temperature and humidity:
+Value Display (V0 for Temperature, V1 for Humidity)
+
+4. Write and Upload the Python Code
+Python Script for DHT11 & Blynk Integration
+
+import Adafruit_DHT
+import BlynkLib
+import time
+
+# Blynk Authentication Token
+BLYNK_AUTH = 'Your_Blynk_Auth_Token'
+
+# Initialize Blynk
+blynk = BlynkLib.Blynk(BLYNK_AUTH)
+
+# Define DHT sensor type and GPIO pin
+DHT_SENSOR = Adafruit_DHT.DHT11
+DHT_PIN = 4  # GPIO4 (BCM numbering)
+
+def read_sensor():
+    humidity, temperature = Adafruit_DHT.read(DHT_SENSOR, DHT_PIN)
+   
+    if humidity is not None and temperature is not None:
+        print(f"Temp: {temperature:.1f}°C, Humidity: {humidity:.1f}%")
+        blynk.virtual_write(0, temperature)  # Send Temperature to Virtual Pin 0
+        blynk.virtual_write(1, humidity)  # Send Humidity to Virtual Pin 1
+    else:
+        print("Failed to read from DHT sensor")
+
+while True:
+    read_sensor()
+    blynk.run()  # Keep connection with Blynk
+    time.sleep(2)  # Read data every 2 seconds
+
+   
+5. Run the Code
+Save the script as dht11_blynk.py.
+Run the script in the terminal:
+python3 dht11_blynk.py
+
+Check the output in the terminal and Blynk dashboard.
+
+
+Observations
+The Raspberry Pi successfully reads temperature and humidity from the DHT11 sensor.
+The Serial Terminal prints real-time sensor data.
+The Blynk App/Web Dashboard updates values every 2 seconds.
+The data is accessible remotely via the Blynk cloud.
+
+Calculations
+Convert Temperature (°C to °F):
+F=(C×1.8)+32
+
+Humidity range interpretation:
+Normal: 30% – 60%
+High: >70% (risk of mold)
+Low: <30% (causes dryness)
+Results
+Raspberry Pi successfully reads sensor data.
+Sensor data is uploaded to the Blynk cloud.
+Blynk displays live temperature and humidity readings.
+Remote monitoring is achieved using IoT.
+
+Conclusion
+IoT integration is successful with DHT11 and Raspberry Pi.
+Data is continuously uploaded to the Blynk cloud for monitoring.
+The system can be expanded for weather stations, automation, and smart home applications.
